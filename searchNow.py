@@ -77,10 +77,11 @@ def searchWikipedia(query):
             speak(result)
         except:
             speak("sorry sir i couldn't find anyting")
-    elif "who is" in query:
+    elif "who is" in query or "who is" in query:
         query =query.replace("orion","")
         query=query.replace("search", "")
         query=query.replace("who is", "")
+        query=query.replace("what is", "")
         query=query.replace("wikipedia","")
         try:
             result=wikipedia.summary(query,sentences=2)

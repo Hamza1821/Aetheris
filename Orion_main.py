@@ -2,6 +2,8 @@ import pyttsx3
 import speech_recognition
 import requests
 from bs4 import BeautifulSoup
+import datetime
+
 
 
 engine=pyttsx3.init("sapi5")
@@ -59,13 +61,21 @@ if __name__=="__main__":
                     continue
                 elif "introduce yourself" in query or "who are you" in query:
                     speak("i am orion, the personal assistant of sir Hamza Mubin ")
-                elif "google" in query:
+
+                elif "open" in query:
+                    from Dictapp import openappweb
+                    openappweb(query)
+                elif "close" in query:
+                    from Dictapp import closeappweb
+                    closeappweb(query)
+
+                elif "google" in query :
                     from searchNow import searchGoogle
                     searchGoogle(query)
                 elif "youtube" in query:
                     from searchNow import searchYoutube
                     searchYoutube(query)
-                elif "wikipedia" in query or "who is" in query:
+                elif "wikipedia" in query or "who is" in query or "what is" in query:
                     from searchNow import searchWikipedia
                     searchWikipedia(query)  
                 elif "temperature" in query:
@@ -74,6 +84,9 @@ if __name__=="__main__":
                     data=BeautifulSoup(r.text,"html.parser")
                     temp=data.find("div", class_= "BNeawe").text
                     speak(f"the temperature is {temp}")
+                elif "the time" in query:
+                    st=datetime.datetime.now().strftime("%H : %M")
+                    speak(st)
                 elif "shutdown" in query:
                     speak("shutting down ! see you later sir")
                     exit();
